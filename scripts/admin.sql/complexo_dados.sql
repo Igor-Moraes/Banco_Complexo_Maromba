@@ -92,3 +92,28 @@ INSERT INTO admin.treinos_exercicios (id_treino_exercicio, id_treino, id_exercic
 (4, 5, 5, 3, 15, 30),
 (6, 7, 7, 2, 10, 0),
 (7, 8, 7, 3, 10, 0);
+
+-- Formas de pagamento
+INSERT INTO admin.forma_pagamento ("id_formaP", tipo) VALUES
+(1, 'Pix'),
+(2, 'Cartão'),
+(3, 'Dinheiro');
+
+-- Plano (necessário pra matrícula existir)
+INSERT INTO admin.plano (id_plano, nome, valor, duracao, descricao) VALUES
+(1, 'Plano Mensal', 120, '2026-01-31', 'Acesso completo à academia por 1 mês'),
+(2, 'Plano Trimestral', 300, '2026-03-31', 'Acesso completo à academia por 3 meses');
+
+-- Matrículas (usando clientes que já existem: 1, 6, 7, 9)
+INSERT INTO admin.matricula (id_matricula, id_cliente, id_plano, data_inicio, data_fim, status) VALUES
+(1, 1, 1, '2026-06-01', '2026-06-30', 'ativa'),
+(2, 6, 2, '2026-05-01', '2026-07-31', 'ativa'),
+(3, 7, 1, '2026-06-10', '2026-07-10', 'ativa'),
+(4, 9, 1, '2026-04-01', '2026-04-30', 'vencida');
+
+-- Pagamentos (ligados às matrículas acima)
+INSERT INTO admin.pagamento (id_pagamento, id_venda, id_matricula, id_forma, valor, data_pagamento, status) VALUES
+(1, NULL, 1, 1, 120.00, '2026-06-01', 'pago'),
+(2, NULL, 2, 2, 300.00, '2026-05-01', 'pago'),
+(3, NULL, 3, 3, 120.00, '2026-06-10', 'pendente'),
+(4, NULL, 4, 2, 120.00, '2026-04-01', 'atrasado');
