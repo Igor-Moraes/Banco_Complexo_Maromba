@@ -92,7 +92,7 @@ ALTER TABLE admin.itens_venda
 -- Constraints for table pagamento
 --
 ALTER TABLE admin.pagamento
-  ADD CONSTRAINT fk_pagamento_forma FOREIGN KEY (id_forma) REFERENCES admin.forma_pagamento ("id_formaP") ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT fk_pagamento_forma FOREIGN KEY ("id_formaP") REFERENCES admin.forma_pagamento ("id_formaP") ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT fk_pagamento_matricula FOREIGN KEY (id_matricula) REFERENCES admin.matricula (id_matricula) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT fk_pagamento_venda FOREIGN KEY (id_venda) REFERENCES admin.venda (id_venda) ON DELETE RESTRICT ON UPDATE RESTRICT;
 

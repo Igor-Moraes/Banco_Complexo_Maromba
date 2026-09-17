@@ -29,11 +29,11 @@ INSERT INTO admin.cliente (id_cliente, nome, cpf, data_nascimento, telefone, ema
 (1, 'Márcio Magalhães', '51075186641', '1970-10-12', '5521976118034', 'prof.marcio.silva@doctum.edu.br', 'Masculino', 'fazer yoga', 1),
 (2, 'Tiago Bittencourt', '23467389653', '1945-10-12', '3284823533', 'prof.tiago@gmail.com', 'Masculino', 'musculação', 3),
 (5, 'Pai do Marllon', '10867389653', '2000-11-07', '3282824533', 'AbacaxiSalgado@gmail.com', 'Masculino', 'Pilates', 4),
-(6, 'Ronaldo Nazário', '123.321.321-30', '2002-02-02', '55+ (32) 99973-8012', 'ronaldofenomeno@gmail.com', 'masculino', 'musculacao', 19),
-(7, 'Vergil ', '399.422.780-10', '1981-12-02', '55+ (32) 99942-3214', 'vergilyamato@gmail.com', 'masculino', 'crossfit', 20),
-(9, 'Leon S. Kennedy', '313.402.780-10', '1999-03-04', '55+ (32) 99923-8057', 'leonardopolicial@gmail.com', 'masculino', 'yoga', 22),
-(10, 'Harry Kane da Silva', '999.402.780-11', '1989-09-06', '55+ (32) 99973-9129', 'kanefuracao@gmail.com', 'masculino', 'nutricionista', 23),
-(15, 'Matheus da Silva', '399.422.780-31', '2000-02-10', '+5532999703031', 'matheus@gmail.com', 'masculino', 'musculacao', 30),
+(6, 'Ronaldo Nazário', '123.321.321-30', '2002-02-02', '55+ (32) 99973-8012', 'ronaldofenomeno@gmail.com', 'Masculino', 'musculacao', 19),
+(7, 'Vergil ', '399.422.780-10', '1981-12-02', '55+ (32) 99942-3214', 'vergilyamato@gmail.com', 'Masculino', 'crossfit', 20),
+(9, 'Leon S. Kennedy', '313.402.780-10', '1999-03-04', '55+ (32) 99923-8057', 'leonardopolicial@gmail.com', 'Masculino', 'yoga', 22),
+(10, 'Harry Kane da Silva', '999.402.780-11', '1989-09-06', '55+ (32) 99973-9129', 'kanefuracao@gmail.com', 'Masculino', 'nutricionista', 23),
+(15, 'Matheus da Silva', '399.422.780-31', '2000-02-10', '+5532999703031', 'matheus@gmail.com', 'Masculino', 'musculacao', 30),
 (16, 'IGOR CARVALHO DE MORAES', '123.321.321-32', '2026-06-02', '32999702829', 'igorcdemoraes@gmail.com', 'Masculino', 'Musculação', 31);
 
 
@@ -97,7 +97,8 @@ INSERT INTO admin.treinos_exercicios (id_treino_exercicio, id_treino, id_exercic
 INSERT INTO admin.forma_pagamento ("id_formaP", tipo) VALUES
 (1, 'Pix'),
 (2, 'Cartão'),
-(3, 'Dinheiro');
+(3, 'Dinheiro'),
+(4, 'Boleto');
 
 -- Plano (necessário pra matrícula existir)
 INSERT INTO admin.plano (id_plano, nome, valor, duracao, descricao) VALUES
@@ -112,7 +113,7 @@ INSERT INTO admin.matricula (id_matricula, id_cliente, id_plano, data_inicio, da
 (4, 9, 1, '2026-04-01', '2026-04-30', 'vencida');
 
 -- Pagamentos (ligados às matrículas acima)
-INSERT INTO admin.pagamento (id_pagamento, id_venda, id_matricula, id_forma, valor, data_pagamento, status) VALUES
+INSERT INTO admin.pagamento (id_pagamento, id_venda, id_matricula, "id_formaP", valor, data_pagamento, status) VALUES
 (1, NULL, 1, 1, 120.00, '2026-06-01', 'pago'),
 (2, NULL, 2, 2, 300.00, '2026-05-01', 'pago'),
 (3, NULL, 3, 3, 120.00, '2026-06-10', 'pendente'),

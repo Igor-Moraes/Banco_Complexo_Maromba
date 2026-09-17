@@ -2,7 +2,7 @@
 
 -- Treinos_cadastrados tem como funcionalidade facilitar a consulta dos treinos dos clientes,
 -- que estão divididas em tabelas diferentes.
-CREATE VIEW site.treinos_cadastrados AS
+CREATE VIEW site.vw_treinos_cadastrados AS
 SELECT txe.id_treino_exercicio,
        c.nome AS nome_cliente,
        f.nome AS nome_funcionario,
@@ -23,7 +23,7 @@ INNER JOIN admin.funcionario f ON t.id_funcionario = f.id_funcionario;
 
 -- Pagamenos_cliente tem como funcionalidade facilitar a implementação de tela de pagamentos no site,
 -- trazendo dados importantes para efeturar o pagamento de um produto ou plano.
-CREATE VIEW site.pagamentos_cliente AS
+CREATE VIEW site.vw_pagamentos_cliente AS
 SELECT pg.id_pagamento,
        c.id_cliente,
        c.nome AS nome_cliente,

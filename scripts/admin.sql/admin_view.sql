@@ -1,4 +1,4 @@
-CREATE VIEW admin.lista_clientes AS 
+CREATE VIEW admin.vw_lista_clientes AS 
 SELECT 
 id_cliente,
 id_endereco,
@@ -10,7 +10,7 @@ email,
 modalidade
 FROM admin.cliente;
 
-CREATE VIEW admin.lista_funcionarios AS
+CREATE VIEW admin.vw_lista_funcionarios AS
 SELECT 
 id_funcionario,
 nome,

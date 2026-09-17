@@ -212,7 +212,7 @@ CREATE TABLE admin.pagamento (
   "id_pagamento" serial primary key NOT NULL,
   "id_venda" integer DEFAULT NULL,
   "id_matricula" integer DEFAULT NULL,
-  "id_forma" integer NOT NULL,
+  "id_formaP" integer NOT NULL,
   "valor" numeric(10,2) NOT NULL,
   "data_pagamento" date NOT NULL,
   "status" character varying(15) NOT NULL
