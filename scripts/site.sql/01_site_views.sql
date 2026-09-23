@@ -36,4 +36,4 @@ FROM admin.pagamento pg
 LEFT JOIN admin.matricula m ON m.id_matricula = pg.id_matricula
 LEFT JOIN admin.venda v ON v.id_venda = pg.id_venda
 INNER JOIN admin.cliente c ON c.id_cliente = COALESCE(m.id_cliente, v.id_cliente)
-INNER JOIN admin.forma_pagamento fp ON fp."id_formaP" = pg.id_forma;
+INNER JOIN admin.forma_pagamento fp ON fp."id_formaP" = pg."id_formaP";

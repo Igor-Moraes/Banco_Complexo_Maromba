@@ -26,14 +26,14 @@ INSERT INTO admin.especialidade (id_especialidade, tipo) VALUES
 
 
 INSERT INTO admin.cliente (id_cliente, nome, cpf, data_nascimento, telefone, email, genero, modalidade, id_endereco) VALUES
-(1, 'Márcio Magalhães', '51075186641', '1970-10-12', '5521976118034', 'prof.marcio.silva@doctum.edu.br', 'Masculino', 'fazer yoga', 1),
-(2, 'Tiago Bittencourt', '23467389653', '1945-10-12', '3284823533', 'prof.tiago@gmail.com', 'Masculino', 'musculação', 3),
-(5, 'Pai do Marllon', '10867389653', '2000-11-07', '3282824533', 'AbacaxiSalgado@gmail.com', 'Masculino', 'Pilates', 4),
-(6, 'Ronaldo Nazário', '123.321.321-30', '2002-02-02', '55+ (32) 99973-8012', 'ronaldofenomeno@gmail.com', 'Masculino', 'musculacao', 19),
-(7, 'Vergil ', '399.422.780-10', '1981-12-02', '55+ (32) 99942-3214', 'vergilyamato@gmail.com', 'Masculino', 'crossfit', 20),
-(9, 'Leon S. Kennedy', '313.402.780-10', '1999-03-04', '55+ (32) 99923-8057', 'leonardopolicial@gmail.com', 'Masculino', 'yoga', 22),
-(10, 'Harry Kane da Silva', '999.402.780-11', '1989-09-06', '55+ (32) 99973-9129', 'kanefuracao@gmail.com', 'Masculino', 'nutricionista', 23),
-(15, 'Matheus da Silva', '399.422.780-31', '2000-02-10', '+5532999703031', 'matheus@gmail.com', 'Masculino', 'musculacao', 30),
+(1, 'Márcio Magalhães', '51075186641', '1970-10-12', '5521976118034', 'prof.marcio.silva@doctum.edu.br', 'Masculino', 'Yoga', 1),
+(2, 'Tiago Bittencourt', '23467389653', '1945-10-12', '3284823533', 'prof.tiago@gmail.com', 'Masculino', 'Musculação', 3),
+(5, 'Pai do Marllon', '10867389653', '2000-11-07', '3282824533', 'AbacaxiSalgado@gmail.com', 'Masculino', 'Yoga', 4),
+(6, 'Ronaldo Nazário', '123.321.321-30', '2002-02-02', '55+ (32) 99973-8012', 'ronaldofenomeno@gmail.com', 'Masculino', 'Musculação', 19),
+(7, 'Vergil ', '399.422.780-10', '1981-12-02', '55+ (32) 99942-3214', 'vergilyamato@gmail.com', 'Masculino', 'Crossfit', 20),
+(9, 'Leon S. Kennedy', '313.402.780-10', '1999-03-04', '55+ (32) 99923-8057', 'leonardopolicial@gmail.com', 'Masculino', 'Yoga', 22),
+(10, 'Harry Kane da Silva', '999.402.780-11', '1989-09-06', '55+ (32) 99973-9129', 'kanefuracao@gmail.com', 'Masculino', 'Crossfit', 23),
+(15, 'Matheus da Silva', '399.422.780-31', '2000-02-10', '+5532999703031', 'matheus@gmail.com', 'Masculino', 'Musculação', 30),
 (16, 'IGOR CARVALHO DE MORAES', '123.321.321-32', '2026-06-02', '32999702829', 'igorcdemoraes@gmail.com', 'Masculino', 'Musculação', 31);
 
 

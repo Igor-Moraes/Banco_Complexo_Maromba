@@ -1,6 +1,5 @@
-CREATE DATABASE complexo_maromba;
-CREATE SCHEMA admin;
-CREATE SCHEMA site;
+CREATE SCHEMA IF NOT EXISTS admin;
+CREATE SCHEMA IF NOT EXISTS site;
 
 CREATE TABLE admin.acesso (
   "id_acesso" serial primary key NOT NULL,
