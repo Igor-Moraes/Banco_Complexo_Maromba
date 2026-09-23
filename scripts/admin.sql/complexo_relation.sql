@@ -60,61 +60,61 @@ ALTER TABLE admin.plano_servicos
 -- Constraints for table matricula
 --
 ALTER TABLE admin.matricula
-  ADD CONSTRAINT fk_matricula_cliente FOREIGN KEY (id_cliente) REFERENCES admin.cliente (id_cliente) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT fk_matricula_plano FOREIGN KEY (id_plano) REFERENCES admin.plano (id_plano) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT fk_matricula_cliente FOREIGN KEY (id_cliente) REFERENCES admin.cliente (id_cliente) ON DELETE CASCADE ON UPDATE CASCADE,   -- cascade para deletar a matricula caso o cliente seja deletado
+  ADD CONSTRAINT fk_matricula_plano FOREIGN KEY (id_plano) REFERENCES admin.plano (id_plano) ON DELETE RESTRICT ON UPDATE CASCADE;         --nao delete o plano caso a matricula seja deletada
 
 --
 -- Constraints for table produto
 --
 ALTER TABLE admin.produto
-  ADD CONSTRAINT fk_estoque_id FOREIGN KEY (id_estoque) REFERENCES admin.estoque (id_estoque) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT fk_estoque_id FOREIGN KEY (id_estoque) REFERENCES admin.estoque (id_estoque) ON DELETE RESTRICT ON UPDATE CASCADE;    --O estoque não deve ser excluído enquanto houver produtos associados, mas atualiza caso o estoque seja atualizado
 
 --
 -- Constraints for table movimentacao_estoque
 --
 ALTER TABLE admin.movimentacao_estoque
-  ADD CONSTRAINT fk_produto_id_me FOREIGN KEY (id_produto) REFERENCES admin.produto (id_produto) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT fk_produto_id_me FOREIGN KEY (id_produto) REFERENCES admin.produto (id_produto) ON DELETE RESTRICT ON UPDATE CASCADE;   --O produto não deve ser excluído enquanto houver movimentações para preservar o histórico.
 
 --
 -- Constraints for table venda
 --
 ALTER TABLE admin.venda
-  ADD CONSTRAINT fk_venda_cliente FOREIGN KEY (id_cliente) REFERENCES admin.cliente (id_cliente) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT fk_venda_cliente FOREIGN KEY (id_cliente) REFERENCES admin.cliente (id_cliente) ON DELETE RESTRICT ON UPDATE CASCADE;  --nao deleta o cliente caso a venda seja deletada, mas atualiza o cliente
 
 --
 -- Constraints for table itens_venda
 --
 ALTER TABLE admin.itens_venda
-  ADD CONSTRAINT fk_itemv_produto FOREIGN KEY (id_produto) REFERENCES admin.produto (id_produto) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT fk_itemv_venda FOREIGN KEY (id_venda) REFERENCES admin.venda (id_venda) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT fk_itemv_produto FOREIGN KEY (id_produto) REFERENCES admin.produto (id_produto) ON DELETE RESTRICT ON UPDATE CASCADE,   --Um produto que aparece em uma venda não deve ser excluído para preservar o histórico da venda.
+  ADD CONSTRAINT fk_itemv_venda FOREIGN KEY (id_venda) REFERENCES admin.venda (id_venda) ON DELETE CASCADE ON UPDATE CASCADE;    --os itens pertencem à venda e devem ser removidos junto com ela.
 
 --
 -- Constraints for table pagamento
 --
 ALTER TABLE admin.pagamento
-  ADD CONSTRAINT fk_pagamento_forma FOREIGN KEY ("id_formaP") REFERENCES admin.forma_pagamento ("id_formaP") ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT fk_pagamento_matricula FOREIGN KEY (id_matricula) REFERENCES admin.matricula (id_matricula) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT fk_pagamento_venda FOREIGN KEY (id_venda) REFERENCES admin.venda (id_venda) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT fk_pagamento_forma FOREIGN KEY ("id_formaP") REFERENCES admin.forma_pagamento ("id_formaP") ON DELETE RESTRICT ON UPDATE CASCADE,    --se a forma de pagamento for deletada, não deleta o pagamento, mas atualiza caso a forma de pagamento seja atualizada
+  ADD CONSTRAINT fk_pagamento_matricula FOREIGN KEY (id_matricula) REFERENCES admin.matricula (id_matricula) ON DELETE CASCADE ON UPDATE CASCADE,    --se a matricula for deletada, deleta o pagamento. (Quando uma matrícula for excluída, todos os pagamentos ligados a ela também devem ser excluídos, porque não faz sentido manter pagamentos de uma matrícula que não existe).
+  ADD CONSTRAINT fk_pagamento_venda FOREIGN KEY (id_venda) REFERENCES admin.venda (id_venda) ON DELETE RESTRICT ON UPDATE CASCADE;    --Um pagamento não pode ser excluído enquanto existir uma venda associado a ele.
 
 --
 -- Constraints for table faturamento_mensal
 --
 ALTER TABLE admin.faturamento_mensal
-  ADD CONSTRAINT fk_faturamento_cliente FOREIGN KEY (id_cliente) REFERENCES admin.cliente (id_cliente) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT fk_faturamento_pagamento FOREIGN KEY (id_pagamento) REFERENCES admin.pagamento (id_pagamento) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT fk_faturamento_cliente FOREIGN KEY (id_cliente) REFERENCES admin.cliente (id_cliente) ON DELETE RESTRICT ON UPDATE CASCADE,    --
+  ADD CONSTRAINT fk_faturamento_pagamento FOREIGN KEY (id_pagamento) REFERENCES admin.pagamento (id_pagamento) ON DELETE RESTRICT ON UPDATE CASCADE;    --
 
 --
 -- Constraints for table treinos
 --
 ALTER TABLE admin.treinos
-  ADD CONSTRAINT fk_treinos_cliente FOREIGN KEY (id_cliente) REFERENCES admin.cliente (id_cliente) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT fk_treinos_funcionarios FOREIGN KEY (id_funcionario) REFERENCES admin.funcionario (id_funcionario) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT fk_treinos_cliente FOREIGN KEY (id_cliente) REFERENCES admin.cliente (id_cliente) ON DELETE RESTRICT ON UPDATE CASCADE,    --
+  ADD CONSTRAINT fk_treinos_funcionarios FOREIGN KEY (id_funcionario) REFERENCES admin.funcionario (id_funcionario) ON DELETE RESTRICT ON UPDATE CASCADE;   --
 
 --
 -- Constraints for table treinos_exercicios
 --
 ALTER TABLE admin.treinos_exercicios
-  ADD CONSTRAINT fk_treinos_exercicios_e FOREIGN KEY (id_exercicio) REFERENCES admin.exercicios (id_exercicio) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT fk_treinos_exercicios_t FOREIGN KEY (id_treino) REFERENCES admin.treinos (id_treino) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT fk_treinos_exercicios_e FOREIGN KEY (id_exercicio) REFERENCES admin.exercicios (id_exercicio) ON DELETE RESTRICT ON UPDATE CASCADE,    --
+  ADD CONSTRAINT fk_treinos_exercicios_t FOREIGN KEY (id_treino) REFERENCES admin.treinos (id_treino) ON DELETE RESTRICT ON UPDATE CASCADE;   --
 
 ;
