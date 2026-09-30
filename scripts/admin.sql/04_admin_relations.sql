@@ -1,73 +1,74 @@
---
--- Constraints for table acesso
---
-ALTER TABLE admin.acesso
-  ADD CONSTRAINT fk_acesso_cliente FOREIGN KEY (id_cliente) REFERENCES admin.cliente (id_cliente) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
---
--- Constraints for table avaliacao
---
-ALTER TABLE admin.avaliacao
-  ADD CONSTRAINT fk_avaliacao_cliente FOREIGN KEY (id_cliente) REFERENCES admin.cliente (id_cliente) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
---
--- Constraints for table cliente
---
-ALTER TABLE admin.cliente
-  ADD CONSTRAINT fk_cliente_endereco FOREIGN KEY (id_endereco) REFERENCES admin.endereco (id_endereco) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
---
--- Constraints for table credenciais
---
-ALTER TABLE admin.credenciais
-  ADD CONSTRAINT fk_credenciais_funcionario FOREIGN KEY (id_funcionario) REFERENCES admin.funcionario (id_funcionario) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT fk_credencial_cliente FOREIGN KEY (id_cliente) REFERENCES admin.cliente (id_cliente) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
---
--- Constraints for table fornecedor
---
-ALTER TABLE admin.fornecedor
-  ADD CONSTRAINT fk_fornecedor_endereco FOREIGN KEY (id_endereco) REFERENCES admin.endereco (id_endereco) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
---
--- Constraints for table equipamentos
---
-ALTER TABLE admin.equipamentos
-  ADD CONSTRAINT fk_equipamento_fornecedor FOREIGN KEY (id_fornecedor) REFERENCES admin.fornecedor (id_fornecedor) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
---
--- Constraints for table funcionario
---
-ALTER TABLE admin.funcionario
-  ADD CONSTRAINT fk_endereco_id FOREIGN KEY (id_endereco) REFERENCES admin.endereco (id_endereco) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT fk_funcionario_especialidade FOREIGN KEY (id_especialidade) REFERENCES admin.especialidade (id_especialidade) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
---
--- Constraints for table funcionario_servicos
---
-ALTER TABLE admin.funcionario_servicos
-  ADD CONSTRAINT fk_funcionario_id FOREIGN KEY (id_funcionario) REFERENCES admin.funcionario (id_funcionario) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT fk_servicos_id FOREIGN KEY (id_servicos) REFERENCES admin.servicos (id_servicos) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
---
--- Constraints for table plano_servicos
---
-ALTER TABLE admin.plano_servicos
-  ADD CONSTRAINT fk_plano_servicos_p FOREIGN KEY (id_plano) REFERENCES admin.plano (id_plano) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT fk_plano_servicos_s FOREIGN KEY (id_servicos) REFERENCES admin.servicos (id_servicos) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
---
--- Constraints for table matricula
---
-ALTER TABLE admin.matricula
-  ADD CONSTRAINT fk_matricula_cliente FOREIGN KEY (id_cliente) REFERENCES admin.cliente (id_cliente) ON DELETE CASCADE ON UPDATE CASCADE,   -- cascade para deletar a matricula caso o cliente seja deletado
-  ADD CONSTRAINT fk_matricula_plano FOREIGN KEY (id_plano) REFERENCES admin.plano (id_plano) ON DELETE RESTRICT ON UPDATE CASCADE;         --nao delete o plano caso a matricula seja deletada
-
---
--- Constraints for table produto
---
-ALTER TABLE admin.produto
-  ADD CONSTRAINT fk_estoque_id FOREIGN KEY (id_estoque) REFERENCES admin.estoque (id_estoque) ON DELETE RESTRICT ON UPDATE CASCADE;    --O estoque não deve ser excluído enquanto houver produtos associados, mas atualiza caso o estoque seja atualizado
+  --
+  -- Constraints for table acesso
+  --
+  ALTER TABLE admin.acesso
+    ADD CONSTRAINT fk_acesso_cliente FOREIGN KEY (id_cliente) REFERENCES admin.cliente (id_cliente) ON DELETE CASCADE ON UPDATE CASCADE; -- Para que o acesso do cliente seja deletado ou atualizado automaticamente. 
+  
+  
+  --
+  -- Constraints for table avaliacao
+  --
+  ALTER TABLE admin.avaliacao
+    ADD CONSTRAINT fk_avaliacao_cliente FOREIGN KEY (id_cliente) REFERENCES admin.cliente (id_cliente) ON DELETE CASCADE ON UPDATE CASCADE; -- Para que a avaliação do cliente seja deletada ou atualizada automnaticamente.
+  
+  --
+  -- Constraints for table cliente
+  --
+  ALTER TABLE admin.cliente
+    ADD CONSTRAINT fk_cliente_endereco FOREIGN KEY (id_endereco) REFERENCES admin.endereco (id_endereco) ON DELETE SET NULL ON UPDATE CASCADE; -- Para que o registro cliente possa permanecer mesmo sem o endereço. E que seja atualizado caso haver alterações.
+  
+  --
+  -- Constraints for table credenciais
+  --
+  ALTER TABLE admin.credenciais
+    ADD CONSTRAINT fk_credenciais_funcionario FOREIGN KEY (id_funcionario) REFERENCES admin.funcionario (id_funcionario) ON DELETE CASCADE ON UPDATE CASCADE, -- Para que as credenciais do funcionário sejam deletadas e atualizadas automaticamente. 
+    ADD CONSTRAINT fk_credencial_cliente FOREIGN KEY (id_cliente) REFERENCES admin.cliente (id_cliente) ON DELETE CASCADE ON UPDATE CASCADE; --Para que as credenciais do cliente sejam deletadas e atualizadas automaticamente. 
+  
+  --
+  -- Constraints for table fornecedor
+  --
+  ALTER TABLE admin.fornecedor
+    ADD CONSTRAINT fk_fornecedor_endereco FOREIGN KEY (id_endereco) REFERENCES admin.endereco (id_endereco) ON DELETE SET NULL ON UPDATE CASCADE; -- Para manter o registro de fonercedor mesmo sem endereço, e em caso de alteração, atualizar automaticamente. 
+  
+  --
+  -- Constraints for table equipamentos
+  --
+  ALTER TABLE admin.equipamentos
+    ADD CONSTRAINT fk_equipamento_fornecedor FOREIGN KEY (id_fornecedor) REFERENCES admin.fornecedor (id_fornecedor) ON DELETE RESTRICT ON UPDATE CASCADE; -- Para impossibilitar haver um equipamentto sem fornecedor, e atualizar automaticamente. 
+  
+  --
+  -- Constraints for table funcionario
+  --
+  ALTER TABLE admin.funcionario
+    ADD CONSTRAINT fk_endereco_id FOREIGN KEY (id_endereco) REFERENCES admin.endereco (id_endereco) ON DELETE SET NULL ON UPDATE CASCADE, -- Para manter o registro funcionario mesmo sem endereço, e para atualizar automaticamente.
+    ADD CONSTRAINT fk_funcionario_especialidade FOREIGN KEY (id_especialidade) REFERENCES admin.especialidade (id_especialidade) ON DELETE RESTRICT ON UPDATE CASCADE; -- Para permitir a funcionalidade da tabela, e para atualizar automaticamnete.
+  
+  --
+  -- Constraints for table funcionario_servicos
+  --
+  ALTER TABLE admin.funcionario_servicos
+    ADD CONSTRAINT fk_funcionario_id FOREIGN KEY (id_funcionario) REFERENCES admin.funcionario (id_funcionario) ON DELETE CASCADE ON UPDATE CASCADE, -- cascade para deletar o registro caso o funcionario seja deletado, pois perde a funcionalidade. E para atualizar automaticamente. 
+    ADD CONSTRAINT fk_servicos_id FOREIGN KEY (id_servicos) REFERENCES admin.servicos (id_servicos) ON DELETE RESTRICT ON UPDATE CASCADE; -- Para permitir a funcionalidade da tabela, e para atualizar automaticamente.
+    
+  --
+  -- Constraints for table plano_servicos
+  --
+  ALTER TABLE admin.plano_servicos
+    ADD CONSTRAINT fk_plano_servicos_p FOREIGN KEY (id_plano) REFERENCES admin.plano (id_plano) ON DELETE CASCADE ON UPDATE CASCADE, -- Para que delete o registro juntamente ao id_plano, pois perde a funcionalidade. Para atualizar automaticamente.
+    ADD CONSTRAINT fk_plano_servicos_s FOREIGN KEY (id_servicos) REFERENCES admin.servicos (id_servicos) ON DELETE CASCADE ON UPDATE CASCADE; --  Para que delete o registro juntamente ao id_servicos, pois perde a funcionalidade. Para atualizar automaticamente.
+  
+  --
+  -- Constraints for table matricula
+  --
+  ALTER TABLE admin.matricula
+    ADD CONSTRAINT fk_matricula_cliente FOREIGN KEY (id_cliente) REFERENCES admin.cliente (id_cliente) ON DELETE CASCADE ON UPDATE CASCADE,   -- cascade para deletar a matricula caso o cliente seja deletado
+    ADD CONSTRAINT fk_matricula_plano FOREIGN KEY (id_plano) REFERENCES admin.plano (id_plano) ON DELETE RESTRICT ON UPDATE CASCADE;         --nao delete o plano caso a matricula seja deletada
+  
+  --
+  -- Constraints for table produto
+  --
+  ALTER TABLE admin.produto
+    ADD CONSTRAINT fk_estoque_id FOREIGN KEY (id_estoque) REFERENCES admin.estoque (id_estoque) ON DELETE RESTRICT ON UPDATE CASCADE;    --O estoque não deve ser excluído enquanto houver produtos associados, mas atualiza caso o estoque seja atualizado
 
 --
 -- Constraints for table movimentacao_estoque
