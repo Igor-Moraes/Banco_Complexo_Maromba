@@ -9,7 +9,6 @@ CREATE TABLE contabil.plano_contas(
 	nome_conta varchar(255) not null,
 	tipo_conta contabil.tipo_conta_enum not null,
 	natureza_conta contabil.natureza_conta_enum not null DEFAULT 'DEVEDORA',
-	valor NUMERIC (10,2) NOT NULL ,
 	CONSTRAINT pk_plano_contas PRIMARY KEY(id_plano_contas)
 );
 
