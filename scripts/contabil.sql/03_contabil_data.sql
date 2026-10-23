@@ -293,3 +293,46 @@ VALUES
     (SELECT id_plano_contas FROM contabil.plano_contas WHERE codigo = '5.1.09'),
     (SELECT id_plano_contas FROM contabil.plano_contas WHERE codigo = '1.1.01'),
     150.00);
+
+
+-- Carga de dados da tabela saldo_contas.
+
+INSERT INTO contabil.saldo_contas (conta_id)
+SELECT id_plano_contas
+FROM contabil.plano_contas;
+
+
+-- Dados para testar a nova função de trigger
+
+INSERT INTO contabil.lancamentos
+    (data_lancamento, historico, conta_debito_id, conta_credito_id, valor)
+VALUES
+('2026-04-01', 'Aporte de capital dos sócios',
+ (SELECT id_plano_contas FROM contabil.plano_contas WHERE nome_conta = 'Bancos - Conta Movimento'),
+ (SELECT id_plano_contas FROM contabil.plano_contas WHERE nome_conta = 'Capital Social'),
+ 30000.00),
+
+('2026-04-02', 'Compra de mercadorias à vista',
+ (SELECT id_plano_contas FROM contabil.plano_contas WHERE nome_conta = 'Estoque de Mercadorias'),
+ (SELECT id_plano_contas FROM contabil.plano_contas WHERE nome_conta = 'Bancos - Conta Movimento'),
+ 8000.00),
+
+('2026-04-03', 'Venda de mercadorias à vista',
+ (SELECT id_plano_contas FROM contabil.plano_contas WHERE nome_conta = 'Caixa'),
+ (SELECT id_plano_contas FROM contabil.plano_contas WHERE nome_conta = 'Receita de Vendas'),
+ 5000.00),
+
+('2026-04-03', 'Baixa do custo da mercadoria vendida',
+ (SELECT id_plano_contas FROM contabil.plano_contas WHERE nome_conta = 'Custo das Mercadorias Vendidas'),
+ (SELECT id_plano_contas FROM contabil.plano_contas WHERE nome_conta = 'Estoque de Mercadorias'),
+ 3000.00),
+
+('2026-04-05', 'Pagamento de aluguel do mês',
+ (SELECT id_plano_contas FROM contabil.plano_contas WHERE nome_conta = 'Despesas com Aluguel'),
+ (SELECT id_plano_contas FROM contabil.plano_contas WHERE nome_conta = 'Bancos - Conta Movimento'),
+ 1500.00),
+
+('2026-04-06', 'Compra de mercadorias a prazo',
+ (SELECT id_plano_contas FROM contabil.plano_contas WHERE nome_conta = 'Estoque de Mercadorias'),
+ (SELECT id_plano_contas FROM contabil.plano_contas WHERE nome_conta = 'Fornecedores a Pagar'),
+ 4000.00);  

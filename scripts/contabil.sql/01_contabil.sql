@@ -31,3 +31,14 @@ CREATE TABLE contabil.lancamentos(
         ON DELETE RESTRICT
         ON UPDATE CASCADE
 );
+
+
+CREATE TABLE contabil.saldo_contas (
+    conta_id SERIAL PRIMARY KEY,
+    saldo NUMERIC (14,2) DEFAULT 0 NOT NULL,
+    data_atualizacao TIMESTAMP DEFAULT now() NOT NULL,
+
+    CONSTRAINT fk_saldo_contas
+    FOREIGN KEY (id_conta)
+    REFERENCES contabil.plano_contas (id_plano_contas)
+);
