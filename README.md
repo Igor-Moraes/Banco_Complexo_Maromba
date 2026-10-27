@@ -29,6 +29,10 @@ scripts/
 └── contabil.sql/
     ├── 01_contabil.sql
     ├── 02_contabil_view.sql
+    ├── 03_contabil_function.sql
+    ├── 04_contabil_trigger.sql
+    ├── 05_contabil_data.sql
+    ├── 06_contabil_select.sql
     └── README.md
 ```
 
@@ -57,6 +61,10 @@ Execute:
 
 1. `scripts/contabil.sql/01_contabil.sql`
 2. `scripts/contabil.sql/02_contabil_view.sql`
+3. `scripts/contabil.sql/03_contabil_function.sql`
+4. `scripts/contabil.sql/04_contabil_trigger.sql`
+5. `scripts/contabil.sql/05_contabil_data.sql`
+6. `scripts/contabil.sql/06_contabil_select.sql`
 
 ### 4. Schema site
 Execute:
