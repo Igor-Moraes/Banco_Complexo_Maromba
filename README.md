@@ -12,7 +12,7 @@ Repositório do banco de dados do projeto **Complexo Maromba**, desenvolvido em 
 ```text
 docs/
 ├── admin_logico.brM3
-└── complexo_bancoadmindados_logico.brM3
+└── Artigo_Cientifico_Complexo_Maromba.docx
 
 scripts/
 ├── admin.sql/
