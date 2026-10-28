@@ -1,4 +1,7 @@
-
+CREATE OR REPLACE FUNCTION contabil.fn_atualiza_saldo()
+RETURNS TRIGGER 
+LANGUAGE plpgsql
+AS $$
 DECLARE
 	v_natureza_debito contabil.plano_contas.natureza_conta%TYPE;
 	v_natureza_credito contabil.plano_contas.natureza_conta%TYPE;
@@ -49,3 +52,4 @@ BEGIN
 	RETURN NEW;
  	
 END;
+$$;
