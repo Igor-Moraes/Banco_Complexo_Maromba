@@ -39,6 +39,6 @@ CREATE TABLE contabil.saldo_contas (
     data_atualizacao TIMESTAMP DEFAULT now() NOT NULL,
 
     CONSTRAINT fk_saldo_contas
-    FOREIGN KEY (id_conta)
+    FOREIGN KEY (conta_id)
     REFERENCES contabil.plano_contas (id_plano_contas)
 );
